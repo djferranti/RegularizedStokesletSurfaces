@@ -10,8 +10,7 @@ To understand how to use the code, read through the examples in the **tests** fo
 3. *testTranslatingSphere.m* : Used the method to evaluate the velocity of a triangulated sphere in Stokes flow given forces that should approximately impose a unit velocity in the x-direction.
 4. *testDragSphere.m* : Does the inverse of the previous script. Calculates the drag on a triangulated sphere in Stokes flow given an imposed velocity field (unit in x-direction) at the triangle vertices.
 
-5. The last two scripts use a Delaunay triangulation of the sphere from John Burkardt's code (see **sphere_delaunay**) distributed under the LGPL license https://www.gnu.org/licenses/lgpl-3.0.en.html. See John Burkardt's website at
-6. https://people.math.sc.edu/Burkardt/m_src/sphere_delaunay/sphere_delaunay.html for more information.
+The last two scripts use a Delaunay triangulation of the sphere from John Burkardt's code (see **sphere_delaunay**) distributed under the LGPL license https://www.gnu.org/licenses/lgpl-3.0.en.html. See John Burkardt's website at https://people.math.sc.edu/Burkardt/m_src/sphere_delaunay/sphere_delaunay.html for more information.
 
 # Future development 
 More test scripts may be added, but this will likely not change much in the near future. Feel free to reach out to me (dferranti--at--wpi--dot--edu) if you have questions.
