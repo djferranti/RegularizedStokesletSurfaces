@@ -1,5 +1,5 @@
 # Regularized Stokeslet Surfaces
-This is a library that implements the regularized Stokeslet surfaces method as described in the Journal of Computational Physics paper https://www.sciencedirect.com/science/article/pii/S0021999124002535.
+This is a Matlab library that implements the regularized Stokeslet surfaces method as described in the Journal of Computational Physics paper https://www.sciencedirect.com/science/article/pii/S0021999124002535.
 A preprint of the paper is available https://arxiv.org/abs/2310.14470 with minor expository changes at the end. 
 
 # Code basics
