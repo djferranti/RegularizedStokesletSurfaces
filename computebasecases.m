@@ -109,10 +109,6 @@ t001 = t001 - gamma.^2 .* t003;
 t003 = bh.^(-1) .* t003; 
 t001 = bh.^(-1) .* t001;
 
-if ~isempty(find(t003<0, 1)) 
-    disp('houston we have a problem')
-end
-
 %put all the geometry data into a struct
 geometryData = struct('x0', x0, 'vhat', vhat, 'what', what, 'x0DotV', ...
     x0DotV, 'x0DotW', x0DotW, 'x1DotW', x1DotW, 'x2DotD', x2DotD, ... 
