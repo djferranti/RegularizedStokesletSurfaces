@@ -1,7 +1,8 @@
-function [TriangleArray, xyzPts, faces] =  triangulatesphereicos(factor, radius, varargin)
+function [TriangleArray, xyzPts, faces] =  triangulatesphereicos(factor, center, radius, varargin)
 %% TRIANGULESPHEREICOS creates array of triangle structs from icosahedral triangulation of sphere
 % Parameters:
 %   factor: number of subdivisions of the icosahedron used.
+%   center: center of sphere
 %   radius: radius of sphere
 %   varargin: index start
 %
@@ -13,12 +14,12 @@ function [TriangleArray, xyzPts, faces] =  triangulatesphereicos(factor, radius,
 %   faces: 3 x N array of indices where N is the number of triangular
 %   faces.
 %
-% Attribution: Uses John Burkardt's sphere_delaunay code distributed
+% Attribution: Uses John Burkhardt's sphere_delaunay code distributed
 % under the GNU LGPL license. Details on the implementation can be found at
 % the website
 % https://people.math.sc.edu/Burkardt/m_src/sphere_delaunay/sphere_delaunay.html.
 
-if nargin == 3
+if nargin == 4
     indexStart = varargin{1};
 else 
     indexStart = 0;
@@ -28,7 +29,7 @@ end
 % addpath(".\sphere_delaunay\")
 
 numberPts = sphere_grid_icos_size(factor);
-xyzPts = radius .* sphere_gridpoints_icos2(factor,numberPts);
+xyzPts = center + radius .* sphere_gridpoints_icos2(factor,numberPts);
 
 
 %compute the Delaunay triangulation of the points.

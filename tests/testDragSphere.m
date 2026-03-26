@@ -5,7 +5,8 @@ mu = 1;
 %use "factor" number of divisions of the icosahedron to triangulate sphere
 factors = [3, 6, 8, 12];
 % factors = [3, 6, 8, 12, 24]; %this one may take a while on a desktop
-radius = 1; 
+center = [0,0,0]'; %sphere center
+radius = 1; %sphere radius
 ell2Errors = zeros(size(factors)); 
 relativeErrors = zeros(size(factors));
 averageDistance = zeros(size(factors));
@@ -17,7 +18,7 @@ for i = 1 : length(factors)
     % in a Triangle struct
     ithFactor = factors(i);
     [TriangleArray, points, faces] = triangulatesphereicos(ithFactor, ...
-        radius);
+       center, radius);
     
     % if you want to see sphere
     % plotSphere(TriangleArray, points, faces)

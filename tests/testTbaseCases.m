@@ -2,15 +2,21 @@
 addpath(genpath('./..'))
 
 %create 100 evaluation points in unit cube
-N=100;
-rng(194)
-xf=rand(3,N);
+% N=100;
+% rng(194)
+% xf=rand(3,N);
+
+xf = [1; 5/4; 1/3];
+% xf = [10; 5/4; 10/3];
+reg = 1/40;
+N=1;
+
 %add vertices of triangle as well  
 % (these cases demonstrate the difficulty of the near singular integrals
 % using default numerical integration techniques)
-xf=[xf,Triangle.vertices];
-N=N+3;
-reg=10^(-6);
+% xf=[xf,Triangle.vertices];
+% N=N+3;
+% reg=10^(-6);
 
 %exact formulas
 [t003,t001,se1m1,se2m1,sdm1,se1p1,se2p1,sdp1, geometryData] = computebasecases(xf, Triangle, reg);
@@ -122,6 +128,22 @@ for i = 1:loopMax
     R2=@(a)(x0DotV(i)+a.*ell1).^2 + R0(i).^2 - (x0DotV(i)).^2;
     Rm1=@(a) R2(a).^(-1/2);
     out(i) = ell1.*integral(Rm1,0,1);
+end
+end 
+
+function out=nIntegrateRm5(x0DotV,x0DotW,vDotW,ell1,ell2,R0) 
+%matlab doesn't support numerical integration on arrays so need for loop
+
+loopMax = size(R0,1);
+out = zeros(size(R0));
+
+for i = 1:loopMax
+    R2=@(a,b)(x0DotV(i)+a.*ell1).^2+(x0DotW(i)+b.*ell2).^2 ...
+        +2.*ell1.*ell2.*a.*b.*vDotW + R0(i).^2-(x0DotV(i)).^2-(x0DotW(i)).^2;
+    Rm5=@(a,b) R2(a,b).^(-5/2);
+    bmax=@(a)a;
+    jacob = sqrt(1-vDotW.^2);
+    out(i) = (ell1.*ell2.*jacob).*integral2(Rm5,0,1,0,bmax);
 end
 end
 
