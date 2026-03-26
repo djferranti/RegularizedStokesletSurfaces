@@ -1,12 +1,12 @@
 function stokesletMatrix = ...
-    assemblestokesletmatrix(xField,TriangleArray,numberTrianglePoints, ...
+    assemblestokesletmatrix(xField,xyzTriangle,TriangleArray, ...
     regularization, mu) 
 %% ASSEMBLESTOKESLETMATRIX assembles the regularized Stokeslet surface matrix. 
 % Parameters:
 %   xField: 3 x M array of field points 
+%   xyzTriangle: 3 x N array of triangle points
 %   TriangleArray: 1 x Q struct array where Q is the number of triangular
 %   faces. 
-%   numberTrianglePoints: number of unique points that make up
 %   triangulation
 %   regularization: blob parameter
 %   mu: viscosity parameter
@@ -17,6 +17,7 @@ function stokesletMatrix = ...
 
 numberFaces = size(TriangleArray,2); 
 numberFieldPoints = size(xField,2);
+numberTrianglePoints = size(xyzTriangle,2);
 
 stokesletMatrix = zeros(3*numberFieldPoints, 3*numberTrianglePoints);
 
@@ -28,7 +29,7 @@ for q = 1: numberFaces
 
     %compute the base cases
     [t003,t001,se1m1,se2m1,sdm1,se1p1,se2p1,sdp1, geometryData] = ...
-        computebasecases(xField, Triangle, regularization);
+        computebasecases(xField, xyzTriangle, Triangle, regularization);
 
     %compute the other T_{mnq} recursively
     [t101, t011] = tqequals1(se1m1, se2m1, sdm1, t001, geometryData);

@@ -1,8 +1,9 @@
 function [t003, t001, se1m1, se2m1, sdm1, se1p1, se2p1, sdp1, ... 
-    geometryData] = computebasecases(xField,Triangle,regularization)
+    geometryData] = computebasecases(xField,xyzTriangle,Triangle,regularization)
 %% COMPUTEBASECASES computes eight base cases for regularized stokeslet surfaces
 % Parameters:
 %   xField: 3 x M array of field points in 3D space
+%   xyzTriangle: 3 x N array of triangle points
 %   Triangle: struct containing data for a single triangle
 %   regularization: regularization parameter for force spreading
 %   geometryData: struct containing the geometry data needed for all the
@@ -32,7 +33,7 @@ ell1 = 0; ell2 = 0; ell3 = 0;
 for i = 1:3 %for every side of triangle
 
     %geometry data
-    ya=Triangle.vertices(:,i); %vertex a of side i
+    ya=xyzTriangle(:,Triangle.indices(i)); %vertex a of side i
     x0i=xField-ya; %vectors pointing from ya to field points
     nhatSidei=Triangle.normalstosides(:,i); %outward normal vector to side i
     sideiLength=Triangle.lengths(i); %length of side i

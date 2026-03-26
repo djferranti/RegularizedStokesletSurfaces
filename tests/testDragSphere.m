@@ -29,7 +29,7 @@ for i = 1 : length(factors)
     disp(['number of DOF = ' num2str(3 * numberTrianglePoints)])
     
     %assemble Stokeslet matrix
-    A = assemblestokesletmatrix(xField,TriangleArray,numberTrianglePoints, ...
+    A = assemblestokesletmatrix(xField, xField, TriangleArray, ...
         regularization, mu); 
 
     disp(['condition number of A = ' num2str(cond(A))])
