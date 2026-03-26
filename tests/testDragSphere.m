@@ -29,7 +29,7 @@ for i = 1 : length(factors)
     disp(['number of DOF = ' num2str(3 * numberTrianglePoints)])
     
     %assemble Stokeslet matrix
-    A = assemblestokesletmatrix(xField, xField, TriangleArray, ...
+    A = assemblestokesletmatrix(xField, points, TriangleArray, ...
         regularization, mu); 
 
     disp(['condition number of A = ' num2str(cond(A))])
@@ -60,6 +60,10 @@ for i = 1 : length(factors)
     relativeErrors(i) = abs(1 - totalDrag(1) ./ (6 * pi* mu * radius) ) ...
         .* 100
     averageDistance(i) = sqrt(mean(bh));
+
+    %test forward velocity computation using known forces
+    veloForward = evaluatevelocity(xField,points,F,TriangleArray, ...
+    regularization, mu);
 
 end
 
