@@ -1,7 +1,7 @@
 function velos = ...
-    evaluatevelocity(xField,xyzTriangle,forcesTriangle,TriangleArray, ...
+    evaluatevelocitysurfaces(xField,xyzTriangle,forcesTriangle,TriangleArray, ...
     regularization, mu) 
-%% EVALUATEVELOCITY evaluates the velocity due to the force density over triangulated surface.
+%% EVALUATEVELOCITYSURFACES evaluates the velocity due to the force density over triangulated surface.
 % Parameters:
 %   xField: 3 x M array of field points 
 %   xyzTriangle: 3 x N array of triangle points
@@ -23,12 +23,12 @@ for q = 1: numberFaces
     %triangle q
     Triangle = TriangleArray(q);
     bh = Triangle.bh; 
-    f0 = forcesTriangle(:, Triangle.indices(1)); 
-    f1 = forcesTriangle(:, Triangle.indices(2)); 
-    f2 = forcesTriangle(:, Triangle.indices(3)); 
+    f0 = forcesTriangle(:, Triangle.indices(1) ); 
+    f1 = forcesTriangle(:, Triangle.indices(2) ); 
+    f2 = forcesTriangle(:, Triangle.indices(3) ); 
     fa = f1 - f0; fb = f2 - f1;
 
-    y0 = xyzTriangle(:, Triangle.indices(1));
+    y0 = xyzTriangle(:, Triangle.indices(1) );
 
     [p00,p10,p01,p20,p11,p02,p30,p21,p12,p03] = computepcoeffs(xField, ...
         f0, f1, f2, y0, Triangle, regularization);
